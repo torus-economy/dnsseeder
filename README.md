@@ -16,6 +16,7 @@ docker pull ghcr.io/torus-economy/dnsseeder:latest
 docker run \
   -d \
   --name torus-dnsseeder \
+  --restart=always \
   ghcr.io/torus-economy/dnsseeder:latest
 ```
 
@@ -34,6 +35,7 @@ docker run \
   -d \
   --name torus-dnsseeder \
   -v /path/settings.conf:/opt/dnsseed/settings.conf \
+  --restart=always \
   ghcr.io/torus-economy/dnsseeder:latest
 ```
 

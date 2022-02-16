@@ -13,19 +13,28 @@ docker pull ghcr.io/torus-economy/dnsseeder:latest
 3. Run Docker container
 
 ```bash
-docker run --name torus-dnsseeder ghcr.io/torus-economy/dnsseeder:latest
+docker run \
+  -d \
+  --name torus-dnsseeder \
+  ghcr.io/torus-economy/dnsseeder:latest
 ```
 
 If required, run additional seeder commands
 
 ```bash
-docker run --name torus-dnsseeder ghcr.io/torus-economy/dnsseeder:latest --help
+docker run \
+  --name torus-dnsseeder \
+  ghcr.io/torus-economy/dnsseeder:latest --help
 ```
 
 If settings.conf file is modified, it should be mounted to the container
 
 ```bash
-docker run --name torus-dnsseeder -v /path/settings.conf:/opt/dnsseed/settings.conf ghcr.io/torus-economy/dnsseeder:latest
+docker run \
+  -d \
+  --name torus-dnsseeder \
+  -v /path/settings.conf:/opt/dnsseed/settings.conf \
+  ghcr.io/torus-economy/dnsseeder:latest
 ```
 
 4. Add cron job to update the seeds list every 30 minutes

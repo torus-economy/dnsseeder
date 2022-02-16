@@ -1,3 +1,47 @@
+# Torus DNS seeder
+
+## Quick introduction for running a Torus DNS seeder
+
+1. Pull prebuilt Docker image or build it yourself
+
+```bash
+docker pull ghcr.io/torus-economy/dnsseeder:latest
+```
+
+2. Update [settings.conf](settings.conf) if using Cloudflare
+
+3. Run Docker container
+
+```bash
+docker run --name torus-dnsseeder ghcr.io/torus-economy/dnsseeder:latest
+```
+
+If required, run additional seeder commands
+
+```bash
+docker run --name torus-dnsseeder ghcr.io/torus-economy/dnsseeder:latest --help
+```
+
+If settings.conf file is modified, it should be mounted to the container
+
+```bash
+docker run --name torus-dnsseeder -v /path/settings.conf:/opt/dnsseed/settings.conf ghcr.io/torus-economy/dnsseeder:latest
+```
+
+4. Add cron job to update the seeds list every 30 minutes
+
+```bash
+*/30 * * * * docker exec -i torus-dnsseeder bash -c "cd cf-uploader && python3 seeder.py"
+```
+
+5. Verify everything is working correctly
+
+```bash
+nslookup mysubdomain.mydomain.com
+```
+
+This is a very short guide on how to get started with Torus DNS seeder. For full guide please read generic-seeder documentation below.
+
 # generic-seeder
 
 ### v1.1.0
